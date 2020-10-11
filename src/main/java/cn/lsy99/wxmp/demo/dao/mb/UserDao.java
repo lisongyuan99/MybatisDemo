@@ -1,6 +1,6 @@
-package cn.lsy99.wxmp.demo.dao;
+package cn.lsy99.wxmp.demo.dao.mb;
 
-import cn.lsy99.wxmp.demo.entity.User;
+import cn.lsy99.wxmp.demo.entity.mb.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

@@ -7,6 +7,8 @@ public class News {
 
     private String img;
 
+    private String content;
+
     public Integer getId() {
         return id;
     }
@@ -31,6 +33,14 @@ public class News {
         this.img = img;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -45,7 +55,8 @@ public class News {
         News other = (News) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-            && (this.getImg() == null ? other.getImg() == null : this.getImg().equals(other.getImg()));
+            && (this.getImg() == null ? other.getImg() == null : this.getImg().equals(other.getImg()))
+            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()));
     }
 
     @Override
@@ -55,6 +66,7 @@ public class News {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
         result = prime * result + ((getImg() == null) ? 0 : getImg().hashCode());
+        result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         return result;
     }
 }

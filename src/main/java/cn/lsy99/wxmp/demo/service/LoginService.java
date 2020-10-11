@@ -1,8 +1,8 @@
 package cn.lsy99.wxmp.demo.service;
 
-import cn.lsy99.wxmp.demo.dao.UserDao;
+import cn.lsy99.wxmp.demo.dao.mb.UserDao;
 import cn.lsy99.wxmp.demo.dao.mbg.UserMapper;
-import cn.lsy99.wxmp.demo.entity.User;
+import cn.lsy99.wxmp.demo.entity.mb.User;
 import cn.lsy99.wxmp.demo.entity.mbg.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

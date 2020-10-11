@@ -3,8 +3,11 @@
 <mapper namespace="cn.lsy99.wxmp.demo.dao.mbg.NewsMapper">
   <resultMap id="BaseResultMap" type="cn.lsy99.wxmp.demo.entity.mbg.News">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="img" jdbcType="VARCHAR" property="img" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.lsy99.wxmp.demo.entity.mbg.News">
+    <result column="title" jdbcType="LONGVARCHAR" property="title" />
+    <result column="img" jdbcType="LONGVARCHAR" property="img" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,8 +68,27 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, img
+    id
   </sql>
+  <sql id="Blob_Column_List">
+    title, img, content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="cn.lsy99.wxmp.demo.entity.mbg.NewsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="cn.lsy99.wxmp.demo.entity.mbg.NewsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -81,9 +103,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from news
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -98,10 +122,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.lsy99.wxmp.demo.entity.mbg.News">
-    insert into news (id, title, img
-      )
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}
-      )
+    insert into news (id, title, img, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=LONGVARCHAR}, #{img,jdbcType=LONGVARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.lsy99.wxmp.demo.entity.mbg.News">
     insert into news
@@ -115,16 +139,22 @@
       <if test="img != null">
         img,
       </if>
+      <if test="content != null">
+        content,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
       <if test="title != null">
-        #{title,jdbcType=VARCHAR},
+        #{title,jdbcType=LONGVARCHAR},
       </if>
       <if test="img != null">
-        #{img,jdbcType=VARCHAR},
+        #{img,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -141,21 +171,32 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
+        title = #{record.title,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.img != null">
-        img = #{record.img,jdbcType=VARCHAR},
+        img = #{record.img,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExampleWithBLOBs" parameterType="map">
     update news
     set id = #{record.id,jdbcType=INTEGER},
-      title = #{record.title,jdbcType=VARCHAR},
-      img = #{record.img,jdbcType=VARCHAR}
+      title = #{record.title,jdbcType=LONGVARCHAR},
+      img = #{record.img,jdbcType=LONGVARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update news
+    set id = #{record.id,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -164,18 +205,22 @@
     update news
     <set>
       <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
+        title = #{title,jdbcType=LONGVARCHAR},
       </if>
       <if test="img != null">
-        img = #{img,jdbcType=VARCHAR},
+        img = #{img,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.lsy99.wxmp.demo.entity.mbg.News">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.lsy99.wxmp.demo.entity.mbg.News">
     update news
-    set title = #{title,jdbcType=VARCHAR},
-      img = #{img,jdbcType=VARCHAR}
+    set title = #{title,jdbcType=LONGVARCHAR},
+      img = #{img,jdbcType=LONGVARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

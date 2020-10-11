@@ -1,7 +1,6 @@
 package cn.lsy99.wxmp.demo.controller;
 
-import cn.lsy99.wxmp.demo.dao.UserDao;
-import cn.lsy99.wxmp.demo.entity.User;
+import cn.lsy99.wxmp.demo.entity.mb.User;
 import cn.lsy99.wxmp.demo.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

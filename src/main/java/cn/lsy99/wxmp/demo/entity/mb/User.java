@@ -1,4 +1,4 @@
-package cn.lsy99.wxmp.demo.entity;
+package cn.lsy99.wxmp.demo.entity.mb;
 
 import lombok.Data;
 
