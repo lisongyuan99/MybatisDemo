@@ -6,14 +6,19 @@
 <generatorConfiguration>
     <properties resource="application.properties"/>
 
-    <context id="myContext" targetRuntime="MyBatis3" defaultModelType="flat">
-        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
-        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
-        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+    <context id="myContext">
+<!--        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>-->
+<!--        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>-->
+<!--        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>-->
+        <plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">
+            <property name="builder" value="true"/>
+            <property name="data" value="true"/>
+        </plugin>
 
-        <commentGenerator>
-            <property name="suppressAllComments" value="true"/>
-        </commentGenerator>
+<!--        <commentGenerator>-->
+<!--            <property name="suppressDate" value="true"/>-->
+<!--            <property name="dateFormat" value="yyyy年MM月dd日"/>-->
+<!--        </commentGenerator>-->
 
         <jdbcConnection driverClass="${spring.datasource.driverClassName}"
                         connectionURL="${spring.datasource.url}"
@@ -22,16 +27,17 @@
             <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="cn.lsy99.wxmp.demo.entity.mbg" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="cn.lsy99.wxmp.demo.entity.table" targetProject="src/main/java">
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="mapper/mbg" targetProject="src/main/resources">
-        </sqlMapGenerator>
-
-        <javaClientGenerator targetPackage="cn.lsy99.wxmp.demo.dao.mbg" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="cn.lsy99.wxmp.demo.dao.mbgds" targetProject="src/main/java">
         </javaClientGenerator>
 
         <table tableName="user"/>
         <table tableName="news"/>
+
+        <table tableName="student"/>
+        <table tableName="course"/>
+        <table tableName="student_course"/>
     </context>
 </generatorConfiguration>
