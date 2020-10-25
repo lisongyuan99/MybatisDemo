@@ -27,10 +27,10 @@
             <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="cn.lsy99.wxmp.demo.entity.table" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="cn.lsy99.mybatis.demo.entity.table" targetProject="src/main/java">
         </javaModelGenerator>
 
-        <javaClientGenerator targetPackage="cn.lsy99.wxmp.demo.dao.mbgds" targetProject="src/main/java">
+        <javaClientGenerator targetPackage="cn.lsy99.mybatis.demo.dao.mbgds" targetProject="src/main/java">
         </javaClientGenerator>
 
         <table tableName="user"/>
